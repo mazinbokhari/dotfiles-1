@@ -132,6 +132,16 @@ download_utils() {
 
 }
 
+load_utils() {
+    if [ -x "utils.sh" ]; then
+        . "utils.sh" || exit 1
+    else
+        download_utils || exit 1
+        print_success "Setup utils downloaded"
+    fi
+    print_success "Setup utils loaded"
+}
+
 extract() {
 
     local archive="$1"
@@ -208,13 +218,7 @@ main() {
     # Ensure that the following actions are made relative to this file's path.
     cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
 
-    # Load utils
-    if [ -x "utils.sh" ]; then
-        . "utils.sh" || exit 1
-    else
-        download_utils || exit 1
-    fi
-    printf "Setup utils loaded\n"
+    load_utils
 
     verify_os || exit 1
 
