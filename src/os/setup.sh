@@ -205,6 +205,8 @@ main() {
     # Ensure that the following actions
     # are made relative to this file's path.
 
+    echo "$(dirname "${BASH_SOURCE[0]}")" 
+
     cd "$(dirname "${BASH_SOURCE[0]}")" \
         || exit 1
 
@@ -235,56 +237,56 @@ main() {
 
     ask_for_sudo
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # Check if this script was run directly (./<path>/setup.sh),
-    # and if not, it most likely means that the dotfiles were not
-    # yet set up, and they will need to be downloaded.
+    # # Check if this script was run directly (./<path>/setup.sh),
+    # # and if not, it most likely means that the dotfiles were not
+    # # yet set up, and they will need to be downloaded.
 
-    printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &> /dev/null \
-        || download_dotfiles
+    # printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &> /dev/null \
+    #     || download_dotfiles
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    ./create_directories.sh
+    # ./create_directories.sh
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    ./create_symbolic_links.sh "$@"
+    # ./create_symbolic_links.sh "$@"
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    ./create_local_config_files.sh
+    # ./create_local_config_files.sh
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    ./install/main.sh
+    # ./install/main.sh
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    ./preferences/main.sh
+    # ./preferences/main.sh
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    if cmd_exists "git"; then
+    # if cmd_exists "git"; then
 
-        if [ "$(git config --get remote.origin.url)" != "$DOTFILES_ORIGIN" ]; then
-            ./initialize_git_repository.sh "$DOTFILES_ORIGIN"
-        fi
+    #     if [ "$(git config --get remote.origin.url)" != "$DOTFILES_ORIGIN" ]; then
+    #         ./initialize_git_repository.sh "$DOTFILES_ORIGIN"
+    #     fi
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    #     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        if ! $skipQuestions; then
-            ./update_content.sh
-        fi
+    #     if ! $skipQuestions; then
+    #         ./update_content.sh
+    #     fi
 
-    fi
+    # fi
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    if ! $skipQuestions; then
-        ./restart.sh
-    fi
+    # if ! $skipQuestions; then
+    #     ./restart.sh
+    # fi
 
 }
 
