@@ -226,47 +226,32 @@ main() {
     # printf "Requesting sudo access -> "
     # ask_for_sudo
 
-
     # Check if this script was run directly (./<path>/setup.sh),
     # and if not, it most likely means that the dotfiles were not
     # yet set up, and they will need to be downloaded.
-
     printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &> /dev/null \
         || download_dotfiles
 
-    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # ./create_directories.sh
-
-    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    ./create_directories.sh
 
     # ./create_symbolic_links.sh "$@"
 
-    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
     # ./create_local_config_files.sh
-
-    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # ./install/main.sh
 
-    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
     # ./preferences/main.sh
-
-    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     if cmd_exists "git"; then
         if [ "$(git config --get remote.origin.url)" != "$DOTFILES_ORIGIN" ]; then
             ./initialize_git_repository.sh "$DOTFILES_ORIGIN"
-            echo 'init git'
         fi
 
         if ! $skipQuestions; then
             ./update_content.sh
         fi
     fi
-    echo 'fin git'
 
     # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
