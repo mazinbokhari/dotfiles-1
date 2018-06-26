@@ -253,11 +253,11 @@ main() {
         fi
     fi
 
-    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    if ! $skipQuestions; then
+        ./restart.sh
+    fi
 
-    # if ! $skipQuestions; then
-    #     ./restart.sh
-    # fi
+    print_success "All done!"
 
 }
 
