@@ -9,6 +9,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 # ./xcode.sh
 ./homebrew.sh
 ./bash.sh
+./zsh.sh
 ./../nvm.sh
 
 ./browsers.sh
