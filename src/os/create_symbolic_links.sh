@@ -9,23 +9,31 @@ create_symlinks() {
 
     declare -a FILES_TO_SYMLINK=(
 
-        "shell/aliases/bash_aliases"
-        "shell/autocomplete/$(get_os)/bash_autocomplete"
-        "shell/bash_exports"
-        "shell/bash_functions"
-        "shell/bash_logout"
-        "shell/bash_options"
-        "shell/bash_profile"
-        "shell/bash_prompt"
-        "shell/bashrc"
-        "shell/curlrc"
-        "shell/inputrc"
+        # "shell/aliases/bash_aliases"
+        # "shell/autocomplete/$(get_os)/bash_autocomplete"
+        # "shell/bash_exports"
+        # "shell/bash_functions"
+        # "shell/bash_logout"
+        # "shell/bash_options"
+        # "shell/bash_profile"
+        # "shell/bash_prompt"
+        # "shell/bashrc"
+        # "shell/curlrc"
+        # "shell/inputrc"
 
-        "git/gitattributes"
-        "git/gitconfig"
-        "git/gitignore"
+        # "git/gitattributes"
+        # "git/gitconfig"
+        # "git/gitignore"
 
-        "tmux/tmux.conf"
+        # "tmux/tmux.conf"
+
+        "bash/bashrc"
+        "bash/bash_profile"
+        "bash/bash_prompt"
+
+        "zsh/zshrc"
+        "zsh/zshenv"
+        "zsh/zgen"
 
         "vim/vim"
         "vim/vimrc"
@@ -48,36 +56,35 @@ create_symlinks() {
 
         sourceFile="$(cd .. && pwd)/$i"
         targetFile="$HOME/.$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
-        print_success "$targetFile → $sourceFile"
 
-        # if [ ! -e "$targetFile" ] || $skipQuestions; then
+        if [ ! -e "$targetFile" ] || $skipQuestions; then
 
-        #     execute \
-        #         "ln -fs $sourceFile $targetFile" \
-        #         "$targetFile → $sourceFile"
+            execute \
+                "ln -fs $sourceFile $targetFile" \
+                "$targetFile → $sourceFile"
 
-        # elif [ "$(readlink "$targetFile")" == "$sourceFile" ]; then
-        #     print_success "$targetFile → $sourceFile"
-        # else
+        elif [ "$(readlink "$targetFile")" == "$sourceFile" ]; then
+            print_success "$targetFile → $sourceFile"
+        else
 
-        #     if ! $skipQuestions; then
+            if ! $skipQuestions; then
 
-        #         ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
-        #         if answer_is_yes; then
+                ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
+                if answer_is_yes; then
 
-        #             rm -rf "$targetFile"
+                    rm -rf "$targetFile"
 
-        #             execute \
-        #                 "ln -fs $sourceFile $targetFile" \
-        #                 "$targetFile → $sourceFile"
+                    execute \
+                        "ln -fs $sourceFile $targetFile" \
+                        "$targetFile → $sourceFile"
 
-        #         else
-        #             print_error "$targetFile → $sourceFile"
-        #         fi
+                else
+                    print_error "$targetFile → $sourceFile"
+                fi
 
-        #     fi
+            fi
 
-        # fi
+        fi
 
     done
 
