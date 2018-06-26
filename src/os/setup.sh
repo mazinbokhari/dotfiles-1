@@ -210,6 +210,8 @@ main() {
     cd "$(dirname "${BASH_SOURCE[0]}")" \
         || exit 1
 
+    echo "done"
+
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # Load utils
@@ -220,6 +222,7 @@ main() {
         download_utils || exit 1
     fi
 
+    echo "done"
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # Ensure the OS is supported and
@@ -228,15 +231,18 @@ main() {
     verify_os \
         || exit 1
 
+    echo "done"
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     skip_questions "$@" \
         && skipQuestions=true
 
+    echo "done"
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     ask_for_sudo
 
+    echo "done"
     # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # # Check if this script was run directly (./<path>/setup.sh),
