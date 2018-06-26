@@ -66,8 +66,9 @@ main() {
     install_homebrew
     opt_out_of_analytics
 
-    brew_update
-    brew_upgrade
+    print_warning "Skipping automatic homebrew update \& upgrade - consider doing so manually"
+    # brew_update
+    # brew_upgrade
 
 }
 
