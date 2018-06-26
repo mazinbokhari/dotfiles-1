@@ -205,13 +205,8 @@ verify_os() {
 # ----------------------------------------------------------------------
 
 main() {
-
-    # Ensure that the following actions
-    # are made relative to this file's path.
-
-    cd "$(dirname "${BASH_SOURCE[0]}")" \
-        || exit 1
-
+    # Ensure that the following actions are made relative to this file's path.
+    cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
 
     # Load utils
     if [ -x "utils.sh" ]; then
@@ -221,11 +216,11 @@ main() {
     fi
     printf "Setup utils loaded\n"
 
-
     verify_os || exit 1
 
     skip_questions "$@" && skipQuestions=true
 
+    printf "Requesting sudo permission\n"
     ask_for_sudo
 
     echo "done"
