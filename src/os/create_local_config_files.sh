@@ -65,7 +65,7 @@ create_vimrc_local() {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 main() {
-
+    # even though you won't really use these at all, whatever still nice to have i guess just in case you like this better
     print_in_purple "\n • Create local config files\n\n"
 
     create_bash_local
