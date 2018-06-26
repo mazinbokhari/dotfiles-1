@@ -114,12 +114,6 @@ download_dotfiles() {
 
     cd "$dotfilesDirectory/src/os" \
         || return 1
-
-    echo 'cding'
-    cd "~/dotfiles"
-
-    echo 'done...'
-
 }
 
 download_utils() {
