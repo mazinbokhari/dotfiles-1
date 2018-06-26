@@ -166,6 +166,7 @@ verify_os() {
         os_version="$(sw_vers -productVersion)"
 
         if is_supported_version "$os_version" "$MINIMUM_MACOS_VERSION"; then
+            printf "You are running macOS %s, which is supported by these dotfiles" "$os_version"
             return 0
         else
             printf "Sorry, this script is intended only for macOS %s+" "$MINIMUM_MACOS_VERSION"
@@ -181,6 +182,7 @@ verify_os() {
         os_version="$(lsb_release -d | cut -f2 | cut -d' ' -f2)"
 
         if is_supported_version "$os_version" "$MINIMUM_UBUNTU_VERSION"; then
+            printf "You are running Ubuntu %s, which is supported by these dotfiles" "$os_version"
             return 0
         else
             printf "Sorry, this script is intended only for Ubuntu %s+" "$MINIMUM_UBUNTU_VERSION"
@@ -205,10 +207,6 @@ main() {
     # Ensure that the following actions
     # are made relative to this file's path.
 
-    echo "done"
-    echo "$(dirname "${BASH_SOURCE[0]}")" 
-    echo "done"
-
     cd "$(dirname "${BASH_SOURCE[0]}")" \
         || exit 1
 
@@ -224,7 +222,7 @@ main() {
         download_utils || exit 1
     fi
 
-    echo "done"
+    printf "Setup utils loaded"
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # Ensure the OS is supported and
@@ -233,7 +231,6 @@ main() {
     verify_os \
         || exit 1
 
-    echo "done"
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     skip_questions "$@" \
