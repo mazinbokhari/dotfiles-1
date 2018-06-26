@@ -223,16 +223,16 @@ main() {
 
     verify_os || exit 1
 
-    # skip_questions "$@" && skipQuestions=true
+    skip_questions "$@" && skipQuestions=true
 
-    # # printf "Requesting sudo access -> "
-    # # ask_for_sudo
+    # printf "Requesting sudo access -> "
+    # ask_for_sudo
 
-    # # Check if this script was run directly (./<path>/setup.sh),
-    # # and if not, it most likely means that the dotfiles were not
-    # # yet set up, and they will need to be downloaded.
-    # printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &> /dev/null \
-    #     || download_dotfiles
+    # Check if this script was run directly (./<path>/setup.sh),
+    # and if not, it most likely means that the dotfiles were not
+    # yet set up, and they will need to be downloaded.
+    printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &> /dev/null \
+        || download_dotfiles
 
 
     # ./create_directories.sh
