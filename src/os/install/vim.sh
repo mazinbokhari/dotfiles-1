@@ -36,8 +36,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 update_plugins() {
 
     execute \
-        # "vim +PluginUpdate +qall" \
         "vim +PlugInstall +qall" \
+        # "vim +PluginUpdate +qall" \
         "Update plugins"
 
 }
