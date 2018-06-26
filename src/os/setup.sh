@@ -137,9 +137,9 @@ load_utils() {
         . "utils.sh" || exit 1
     else
         download_utils || exit 1
-        print_success "Setup utils downloaded"
+        # print_success "Setup utils downloaded"
     fi
-    print_success "Setup utils loaded"
+    # print_success "Setup utils loaded"
 }
 
 extract() {
