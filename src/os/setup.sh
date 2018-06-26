@@ -224,7 +224,7 @@ main() {
 
     skip_questions "$@" && skipQuestions=true
 
-    printf "Requesting sudo permission\n"
+    printf "Requesting sudo permission ->"
     ask_for_sudo
 
     echo "done"
