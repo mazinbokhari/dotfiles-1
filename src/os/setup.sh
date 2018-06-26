@@ -168,7 +168,7 @@ verify_os() {
         os_version="$(sw_vers -productVersion)"
 
         if is_supported_version "$os_version" "$MINIMUM_MACOS_VERSION"; then
-            printf "You are running macOS %s, which is supported by these dotfiles\n" "$os_version"
+            print_success "Running macOS %s" "$os_version"
             return 0
         else
             printf "Sorry, this script is intended only for macOS %s+" "$MINIMUM_MACOS_VERSION"
