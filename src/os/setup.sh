@@ -147,6 +147,8 @@ extract() {
 }
 
 verify_os() {
+    # Ensure the OS is supported and
+    # it's above the required version.
 
     declare -r MINIMUM_MACOS_VERSION="10.10"
     declare -r MINIMUM_UBUNTU_VERSION="14.04"
@@ -166,7 +168,7 @@ verify_os() {
         os_version="$(sw_vers -productVersion)"
 
         if is_supported_version "$os_version" "$MINIMUM_MACOS_VERSION"; then
-            printf "You are running macOS %s, which is supported by these dotfiles" "$os_version"
+            printf "You are running macOS %s, which is supported by these dotfiles\n" "$os_version"
             return 0
         else
             printf "Sorry, this script is intended only for macOS %s+" "$MINIMUM_MACOS_VERSION"
@@ -182,7 +184,7 @@ verify_os() {
         os_version="$(lsb_release -d | cut -f2 | cut -d' ' -f2)"
 
         if is_supported_version "$os_version" "$MINIMUM_UBUNTU_VERSION"; then
-            printf "You are running Ubuntu %s, which is supported by these dotfiles" "$os_version"
+            printf "You are running Ubuntu %s, which is supported by these dotfiles\n" "$os_version"
             return 0
         else
             printf "Sorry, this script is intended only for Ubuntu %s+" "$MINIMUM_UBUNTU_VERSION"
@@ -210,34 +212,19 @@ main() {
     cd "$(dirname "${BASH_SOURCE[0]}")" \
         || exit 1
 
-    echo "done"
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # Load utils
-
     if [ -x "utils.sh" ]; then
         . "utils.sh" || exit 1
     else
         download_utils || exit 1
     fi
+    printf "Setup utils loaded\n"
 
-    printf "Setup utils loaded"
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # Ensure the OS is supported and
-    # it's above the required version.
+    verify_os || exit 1
 
-    verify_os \
-        || exit 1
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    skip_questions "$@" \
-        && skipQuestions=true
-
-    echo "done"
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    skip_questions "$@" && skipQuestions=true
 
     ask_for_sudo
 
