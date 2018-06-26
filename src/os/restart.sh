@@ -21,7 +21,7 @@ main() {
         return 0
     fi
 
-    printf "Well do it yourself then!\n"
+    print_warning "Well do it yourself then!\n"
 
 
     # ask_for_confirmation "Are you sure you want to restart?"
