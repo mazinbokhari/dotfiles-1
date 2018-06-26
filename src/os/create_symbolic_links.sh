@@ -8,25 +8,6 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 create_symlinks() {
 
     declare -a FILES_TO_SYMLINK=(
-
-        # "shell/aliases/bash_aliases"
-        # "shell/autocomplete/$(get_os)/bash_autocomplete"
-        # "shell/bash_exports"
-        # "shell/bash_functions"
-        # "shell/bash_logout"
-        # "shell/bash_options"
-        # "shell/bash_profile"
-        # "shell/bash_prompt"
-        # "shell/bashrc"
-        # "shell/curlrc"
-        # "shell/inputrc"
-
-        # "git/gitattributes"
-        # "git/gitconfig"
-        # "git/gitignore"
-
-        # "tmux/tmux.conf"
-
         "bash/bashrc"
         "bash/bash_profile"
         "bash/bash_prompt"
@@ -38,6 +19,27 @@ create_symlinks() {
         "vim/vim"
         "vim/vimrc"
 
+        "emacs/spacemacs.d"
+        "emacs/emacs.d"
+
+        "tmux/tmux"
+        "tmux/tmux.conf"
+
+        "shared/checks"
+        "shared/aliases"
+        "shared/exports"
+        "shared/functions"
+        "shared/path"
+        "shared/extra"
+
+        "tools/fzf"
+        "shared/gitconfig"
+        "shared/dircolors"
+        "shared/jupyter"
+        "shared/ptpython"
+
+        # "shared/htop" -> ${XDG_CONFIG_HOME}/htop
+        # "shared/bpython" -> ${XDG_CONFIG_HOME}/bpython
     )
 
     local i=""
