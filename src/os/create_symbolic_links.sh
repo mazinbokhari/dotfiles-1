@@ -48,35 +48,36 @@ create_symlinks() {
 
         sourceFile="$(cd .. && pwd)/$i"
         targetFile="$HOME/.$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
+        print_success "$targetFile → $sourceFile"
 
-        if [ ! -e "$targetFile" ] || $skipQuestions; then
+        # if [ ! -e "$targetFile" ] || $skipQuestions; then
 
-            execute \
-                "ln -fs $sourceFile $targetFile" \
-                "$targetFile → $sourceFile"
+        #     execute \
+        #         "ln -fs $sourceFile $targetFile" \
+        #         "$targetFile → $sourceFile"
 
-        elif [ "$(readlink "$targetFile")" == "$sourceFile" ]; then
-            print_success "$targetFile → $sourceFile"
-        else
+        # elif [ "$(readlink "$targetFile")" == "$sourceFile" ]; then
+        #     print_success "$targetFile → $sourceFile"
+        # else
 
-            if ! $skipQuestions; then
+        #     if ! $skipQuestions; then
 
-                ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
-                if answer_is_yes; then
+        #         ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
+        #         if answer_is_yes; then
 
-                    rm -rf "$targetFile"
+        #             rm -rf "$targetFile"
 
-                    execute \
-                        "ln -fs $sourceFile $targetFile" \
-                        "$targetFile → $sourceFile"
+        #             execute \
+        #                 "ln -fs $sourceFile $targetFile" \
+        #                 "$targetFile → $sourceFile"
 
-                else
-                    print_error "$targetFile → $sourceFile"
-                fi
+        #         else
+        #             print_error "$targetFile → $sourceFile"
+        #         fi
 
-            fi
+        #     fi
 
-        fi
+        # fi
 
     done
 
