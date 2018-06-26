@@ -184,7 +184,7 @@ verify_os() {
         os_version="$(lsb_release -d | cut -f2 | cut -d' ' -f2)"
 
         if is_supported_version "$os_version" "$MINIMUM_UBUNTU_VERSION"; then
-            printf "You are running Ubuntu %s, which is supported by these dotfiles\n" "$os_version"
+            print_success "Running Ubuntu %s" "$os_version"
             return 0
         else
             printf "Sorry, this script is intended only for Ubuntu %s+" "$MINIMUM_UBUNTU_VERSION"
